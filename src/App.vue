@@ -6,11 +6,7 @@
           <v-card flat>
             <v-card-title>REQUEST</v-card-title>
             <v-card-text>
-              <v-text-field
-                label="https://acme.com"
-                filled
-                v-model="url"
-              ></v-text-field>
+              <v-text-field label="Url" filled v-model="url"></v-text-field>
               <div>
                 <v-btn
                   :depressed="selectedMethod !== method"
@@ -86,7 +82,7 @@ export default {
     const that = this;
     return {
       url: "",
-      selectedMethod: "",
+      selectedMethod: "get",
       query: {},
       body: {},
       headers: {},
@@ -195,7 +191,7 @@ export default {
         this.loading = true;
         let queryString = "";
         if (this.query) {
-          queryString = new URLSearchParams(this.query).toString();
+          queryString = "?" + new URLSearchParams(this.query).toString();
         }
         const res = await fetch(this.url + queryString, {
           method: this.method,
